@@ -89,6 +89,26 @@ def head_loss_A(Q, D, L, Leqcurv, ρ, mu, ϵ, return_velocity=False):
     else:
         return h_A
 
+def head_loss_B(Q, D, L, Leqcurv, ρ, mu, ϵ, return_velocity=False):
+    Q_A = 0.4*Q
+    
+    v = (4*Q_A)/(np.pi*(D**2)) 
+    Re = ρ*v*D/mu
+    
+    f = calc_f(D, Re, ϵ)
+    
+    hl = f * (L/D) * ((v**2)/2)
+    hm = 20 * f * Leqcurv * ((v**2)/2) 
+    
+    h_B = hl+hm
+
+    if return_velocity:
+        return h_B, v
+    
+    else:
+        return h_B
+
+
 def head_loss_31(Q, D, L, Leqcot, Leqvalv, ρ, mu, ϵ, return_velocity=False):
     v = (4*Q)/(np.pi*(D**2)) 
     Re = ρ*v*D/mu
