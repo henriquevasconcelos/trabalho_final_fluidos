@@ -137,7 +137,7 @@ def calc_W_bomba(h_12, h_23A, h_A, h_31, ρ, Q):
     
     return W_bomba
 
-def calc_C_total(D_array, L12, L23A, L23B, L31, b, F, C2, t, W_bomba, n, a):
+def calc_C_total(D_array, L12, L23A, L23B, L31, b, F, C2, t, W_bomba, n, a, return_all_costs=False):
     C_P12 = ((4798.3 * D_array[0]) - 27.429) * L12
     C_P23A = ((4798.3 * D_array[1]) - 27.429) * L23A
     C_P23B = ((4798.3 * D_array[2]) - 27.429) * L23B
@@ -147,4 +147,8 @@ def calc_C_total(D_array, L12, L23A, L23B, L31, b, F, C2, t, W_bomba, n, a):
     C_OP = (C2 * t * W_bomba)/(n)
     C_total = C_PT + C_OP
    
-    return C_total
+    if return_all_costs:
+        return C_PT, C_OP
+        
+    else:
+        return C_total
